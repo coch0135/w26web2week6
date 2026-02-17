@@ -107,6 +107,10 @@ main {
 	/* box shadow is a great effect for creating dimension
 	in boxshadow, the properties are: type x, offset y, offset length (or size), color */
 	box-shadow: 5px 5px 10px black, inset 3px 3px 7px black; /* adds outer and inner box shadows to bulletin board */
+
+	/* this grid will allow us to position some images to the left and some to the right */
+	display: grid;
+	grid-template-columns: 1fr;
 }
 
 /********************************
@@ -157,5 +161,71 @@ nav a {
 	color: white;
 	font-weight: bold;
 	text-decoration: none; /* removes underline */
-	
 }
+
+/* vertical space for the links in the drop-down nav */
+nav ul li ul a{
+	line-height: 1.5;
+	/* line-height is a percentage, so 1.5 = 150% times the size of the font */
+}
+
+/********************************
+	pictures (added in class)
+********************************/
+
+p {
+	line-height: 1.4; /* a bit of line height on blocks of text opens the text up, making it look friendlier and easier to read */
+}
+
+article {
+	background-color: white;
+	border: 1px solid #aaa;
+	box-shadow: 2px 2px 4px rgb(50, 50, 50); /* this drop-shadow is a dark grey - a little lighter than the other shadows so will appear less strong */
+
+	border-radius: 2px; /* slightly rounds corners for a friendlier look */
+}
+
+header article {
+	/* a bit of padding for the first article without a picture */
+	margin: 20px 0;
+	padding: 10px;
+}
+
+section article {
+	/* fixed widths for the articles with pictures */
+	width: 350px;
+	padding: 23px;
+	/* make this position relative so it will hold the absolutely positioed before section, below */
+	position: relative;
+}
+
+/* set some of the sections to  be on the right
+nth child (3) would only be the third child
+nth child (2n) would be every second, starting with the second
+nth-child (2n+1) would be every second, starting with the first
+nth-child (2n+3) would be every second, starting with the third
+nth-child (3n) would be every third
+...you can do the same with nth-of-type, nth-last-child, and nth-last-of-type (you can also use odd and even isntead of 2n) */
+
+main section:nth-child(2n+3) { 
+	justify-self: end; /* this tells the elements to go to the end of the grid row, instead of the start */
+
+	/* use negative margin to make the images look overlapping */
+	margin-top: 100px;
+	margin-bottom: -100px;
+}
+
+/* every element in HTML has two extra sections: a before and an after
+...but these sections only exist if you tell them to exist and that they have content */
+
+section article::before {
+	content: ' '; /* by giving the before section content (a space) we are telling it to exist */
+	width: 180px;
+	height: 50px;
+	/* you can use rgba (a = alpha) to make something partially transparent */
+	background-color: rgba(222, 222, 222, 0.6); /* alpha is a value between 0 and 1, where 0 is completely transparent and 1 is completely opaque */
+	position: absolute;
+	left: 105px;
+	top: -15px;
+
+	transform: rotate(-5deg); /* makes the tape look tilted */
