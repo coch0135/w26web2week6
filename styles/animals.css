@@ -42,11 +42,16 @@
     font-style: normal;
 }
 
+/* use this if you want box-sizing to apply to all CSS elements */
+
 /********************************
 			Custom Properties
 ********************************/
+/* this will make your custom properties available to the whole page (or global in scope) */
 
-
+:root { /* root means the root element of the document */
+		--mud-brown:#542401; /* this labels #542401 as mud-brown */
+}
 
 /********************************
 			Main
@@ -83,3 +88,74 @@ footer{
 	Special (added in class)
 ********************************/
 
+main {
+	width: 960px; /* always set a maximum width for your site */
+	margin: 0 auto; /* centers content */
+
+	background-image: url(../images/corkback.jpg); /* bulletin board background */
+	/* by default, a background image will repeat */
+
+	border: 25px solid var(--mud-brown); /* bulletin board edges */
+	border-top: 0px; /* this will remove the border on the top */
+	border-bottom-left-radius: 25px; /* you can control the border radius for each corner separately */
+
+	padding: 25px 45px 45px; /* three values means top, left and right, bottom */
+	/* to account for the extra margin and padding, we can use box-sizing */
+
+	box-sizing: border-box; /* border-box means the padding and border will be calculated within the width (so long as you have a set width) */
+
+	/* box shadow is a great effect for creating dimension
+	in boxshadow, the properties are: type x, offset y, offset length (or size), color */
+	box-shadow: 5px 5px 10px black, inset 3px 3px 7px black; /* adds outer and inner box shadows to bulletin board */
+}
+
+/********************************
+	drop-down nav (added in class)
+********************************/
+
+nav {
+	width: 960px;
+	margin: 0 auto;
+	background-color: var(--mud-brown);
+	height: 55px;
+	font-size: 2em;
+	border-top-left-radius: 25px;
+	border-top-right-radius: 25px;
+	
+	position: sticky; /* make the menu "stick" to the top of the page */
+	top: 0;
+}
+
+/* the > selector means direct child, or only the ul that is a direct child of the nav (and not the ul inside of the ul) */
+nav > ul {
+	display: flex;
+	justify-content: flex-end; /* flex-end pushes content to the right, or the opposite way the text starts */
+	padding-top: 15px;
+}
+
+/* now get only the list items tht are direct children of the first ul */
+nav > ul > li {
+	padding: 0 10px;
+	position: relative; /* this needs to be position relative so it will hold the absolutely positioned drop-down */
+}
+
+/* hide the nav */
+nav ul li ul {
+	display: none; 
+}
+
+/* make the hidden nav show up when you hover over one of the list items */
+nav ul li:hover ul {
+	display: block;
+	position: absolute;
+	background-color: var(--mud-brown);
+	padding-top: 10px;
+	box-shadow: 3px 3px 7px black;
+}
+
+nav a {
+	color: white;
+	font-weight: bold;
+	text-decoration: none; /* removes underline */
+	
+}
